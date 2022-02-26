@@ -1,13 +1,13 @@
-const Person = require("../models/person");
+const Place = require("../models/place");
 const router = require("express").Router();
 
 router.post("/create", async (req, res) => {
   try {
-    const person = new Person({ ...req.body });
-    await person.save();
+    const place = new Place({ ...req.body });
+    await place.save();
     return res
       .status(200)
-      .json({ message: "Created successfully!", person });
+      .json({ message: "Created successfully!", place });
   } catch (e) {
     console.log(e);
     return res
@@ -18,11 +18,11 @@ router.post("/create", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const persons = await Person.find();
-    if (!persons) {
-      return res.status(400).json({ message: "persons not found, try again" });
+    const places = await Place.find();
+    if (!places) {
+      return res.status(400).json({ message: "places not found, try again" });
     }
-    return res.status(200).json({ persons });
+    return res.status(200).json({ places });
   } catch (e) {
     console.log(e);
     return res
@@ -35,7 +35,7 @@ router.put("/update", async (req, res) => {
   try {
     const query = { _id: req.body._id };
 
-    Person.findOneAndUpdate(
+    Place.findOneAndUpdate(
       query,
       req.body.data,
       { upsert: true },
@@ -53,7 +53,7 @@ router.put("/update", async (req, res) => {
 
 router.delete("/delete", async (req, res) => {
   try {
-    await Person.findByIdAndRemove(req.body._id);
+    await Place.findByIdAndRemove(req.body._id);
     return await res.status(200).json({ message: "Ok" });
   } catch (e) {
     console.log(e);
