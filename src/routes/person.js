@@ -7,10 +7,12 @@ router.post("/create", async (req, res) => {
     await person.save();
     return res
       .status(200)
-      .json({ message: "Test created successfully!", test });
+      .json({ message: "Test created successfully!", person });
   } catch (e) {
     console.log(e);
-    return res.status(500).json({ message: "Something went wrong, try again", error: e });
+    return res
+      .status(500)
+      .json({ message: "Something went wrong, try again", error: e });
   }
 });
 
@@ -23,36 +25,42 @@ router.get("/", async (req, res) => {
     return res.status(200).json({ persons });
   } catch (e) {
     console.log(e);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong, try again", error: e });
+  }
+});
+
+router.put("/update", async (req, res) => {
+  try {
+    const query = { _id: req.body._id };
+
+    Person.findOneAndUpdate(
+      query,
+      req.body.data,
+      { upsert: true },
+      function (err, doc) {
+        if (err) return res.send(500, { error: err });
+        return res.status(200).json({ message: "Updated!" });
+      }
+    );
+
+  } catch (e) {
+    console.log(e);
     return res.status(500).json({ message: "Something went wrong, try again" });
   }
 });
 
-// router.put("/update", async (req, res) => {
-//   try {
-//     const test = new Test({
-//       name: "test name",
-//     });
-//     await test.save();
-//     return res
-//       .status(200)
-//       .json({ message: "Test created successfully!", test });
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(500).json({ message: "Something went wrong, try again" });
-//   }
-// });
-
-// router.delete("/delete", async (req, res) => {
-//   try {
-//     const tests = await Test.find();
-//     if (!tests) {
-//       return res.status(400).json({ message: "tests not found, try again" });
-//     }
-//     return res.status(200).json({ tests });
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(500).json({ message: "Something went wrong, try again" });
-//   }
-// });
+router.delete("/delete", async (req, res) => {
+  try {
+    await Person.findByIdAndRemove(req.body._id);
+    return await res.status(200).json({ message: "Ok" });
+  } catch (e) {
+    console.log(e);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong, try again", error: e });
+  }
+});
 
 module.exports = router;

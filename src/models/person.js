@@ -17,10 +17,6 @@ const schema = new Schema({
     type: String,
     required: true
   },
-  reachedBy: {
-    type: String,
-    required: true,
-  },
   car:{
     model:{
       type: String,
