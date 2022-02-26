@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
     if (!persons) {
       return res.status(400).json({ message: "persons not found, try again" });
     }
-    return res.status(200).json({ tests });
+    return res.status(200).json({ persons });
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: "Something went wrong, try again" });

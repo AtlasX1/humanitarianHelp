@@ -14,6 +14,7 @@ const initServer = () => {
     res.end("Server is running!");
   });
   app.use("/api/test", require("./src/routes/test"));
+  app.use("/api/person", require("./src/routes/person"));
 
 
   app.listen(process.env.PORT || 5000, () => {
