@@ -16,6 +16,7 @@ const initServer = () => {
   app.use("/api/test", require("./src/routes/test"));
   app.use("/api/person", require("./src/routes/person"));
   app.use("/api/place", require("./src/routes/place"));
+  app.use("/api/humanitaryUnit", require("./src/routes/humanitaryUnit"));
 
 
   app.listen(process.env.PORT || 5000, () => {
