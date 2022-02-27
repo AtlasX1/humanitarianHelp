@@ -7,7 +7,7 @@ router.post("/create", async (req, res) => {
     await person.save();
     return res
       .status(200)
-      .json({ message: "Created successfully!", refugees: person });
+      .json({ message: "Created successfully!", refugee: person });
   } catch (e) {
     console.log(e);
     return res
