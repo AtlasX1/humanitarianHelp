@@ -29,20 +29,20 @@ router.post("/create", async (req, res) => {
   }
 });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const places = await Place.find();
-//     if (!places) {
-//       return res.status(400).json({ message: "places not found, try again" });
-//     }
-//     return res.status(200).json({ places });
-//   } catch (e) {
-//     console.log(e);
-//     return res
-//       .status(500)
-//       .json({ message: "Something went wrong, try again", error: e });
-//   }
-// });
+router.get("/", async (req, res) => {
+  try {
+    const receivedHumanitaryUnit = await ReceivedHumanitaryUnit.find();
+    if (!places) {
+      return res.status(400).json({ message: "receivedHumanitaryUnit not found, try again" });
+    }
+    return res.status(200).json({ receivedHumanitaryUnit });
+  } catch (e) {
+    console.log(e);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong, try again", error: e });
+  }
+});
 
 // router.put("/update", async (req, res) => {
 //   try {
