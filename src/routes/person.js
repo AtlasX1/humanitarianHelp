@@ -1,9 +1,9 @@
-const Person = require("../models/person");
+const Refugee = require("../models/refugee");
 const router = require("express").Router();
 
 router.post("/create", async (req, res) => {
   try {
-    const person = new Person({ ...req.body });
+    const person = new Refugee({ ...req.body });
     await person.save();
     return res
       .status(200)
@@ -18,7 +18,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const persons = await Person.find();
+    const persons = await Refugee.find();
     if (!persons) {
       return res.status(400).json({ message: "persons not found, try again" });
     }
@@ -36,7 +36,7 @@ router.put("/update", async (req, res) => {
   try {
     const query = { _id: req.body._id };
 
-    Person.findOneAndUpdate(
+    Refugee.findOneAndUpdate(
       query,
       req.body.data,
       { upsert: true },
@@ -53,7 +53,7 @@ router.put("/update", async (req, res) => {
 
 router.delete("/delete", async (req, res) => {
   try {
-    await Person.findByIdAndRemove(req.body._id);
+    await Refugee.findByIdAndRemove(req.body._id);
     return await res.status(200).json({ message: "Ok" });
   } catch (e) {
     console.log(e);
