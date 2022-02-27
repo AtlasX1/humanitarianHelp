@@ -35,6 +35,7 @@ router.get("/", async (req, res) => {
     if (!places) {
       return res.status(400).json({ message: "receivedHumanitaryUnit not found, try again" });
     }
+    receivedHumanitaryUnit.reverse()
     return res.status(200).json({ receivedHumanitaryUnit });
   } catch (e) {
     console.log(e);

@@ -5,9 +5,7 @@ router.post("/create", async (req, res) => {
   try {
     const place = new Place({ ...req.body });
     await place.save();
-    return res
-      .status(200)
-      .json({ message: "Created successfully!", place });
+    return res.status(200).json({ message: "Created successfully!", place });
   } catch (e) {
     console.log(e);
     return res
@@ -22,6 +20,7 @@ router.get("/", async (req, res) => {
     if (!places) {
       return res.status(400).json({ message: "places not found, try again" });
     }
+    places.reverse();
     return res.status(200).json({ places });
   } catch (e) {
     console.log(e);
@@ -44,7 +43,6 @@ router.put("/update", async (req, res) => {
         return res.status(200).json({ message: "Updated!" });
       }
     );
-
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: "Something went wrong, try again" });

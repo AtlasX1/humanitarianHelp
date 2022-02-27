@@ -5,9 +5,7 @@ router.post("/create", async (req, res) => {
   try {
     const person = new Person({ ...req.body });
     await person.save();
-    return res
-      .status(200)
-      .json({ message: "Created successfully!", person });
+    return res.status(200).json({ message: "Created successfully!", person });
   } catch (e) {
     console.log(e);
     return res
@@ -22,6 +20,7 @@ router.get("/", async (req, res) => {
     if (!persons) {
       return res.status(400).json({ message: "persons not found, try again" });
     }
+    persons.reverse();
     return res.status(200).json({ persons });
   } catch (e) {
     console.log(e);
@@ -44,7 +43,6 @@ router.put("/update", async (req, res) => {
         return res.status(200).json({ message: "Updated!" });
       }
     );
-
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: "Something went wrong, try again" });

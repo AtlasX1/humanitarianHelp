@@ -20,8 +20,11 @@ router.get("/", async (req, res) => {
   try {
     const humanitaryUnits = await HumanitaryUnit.find();
     if (!humanitaryUnits) {
-      return res.status(400).json({ message: "humanitaryUnits not found, try again" });
+      return res
+        .status(400)
+        .json({ message: "humanitaryUnits not found, try again" });
     }
+    humanitaryUnits.reverse();
     return res.status(200).json({ humanitaryUnits });
   } catch (e) {
     console.log(e);
@@ -44,7 +47,6 @@ router.put("/update", async (req, res) => {
         return res.status(200).json({ message: "Updated!" });
       }
     );
-
   } catch (e) {
     console.log(e);
     return res.status(500).json({ message: "Something went wrong, try again" });
