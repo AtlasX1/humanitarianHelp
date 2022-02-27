@@ -21,7 +21,7 @@ router.get("/", async (req, res) => {
       return res.status(400).json({ message: "persons not found, try again" });
     }
     persons.reverse();
-    return res.status(200).json({ persons });
+    return res.status(200).json({ refugees:persons });
   } catch (e) {
     console.log(e);
     return res
