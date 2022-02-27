@@ -25,7 +25,7 @@ const schema = new Schema({
       type: String,
     },
   },
-  stayAdress: {
+  stayAddress: {
     type: String,
     required: true,
   },
